@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../../components/components/common/Header";
+import Header from "../../components/common/Header";
 import { Container } from "./styled";
 
 const Home = () => {
