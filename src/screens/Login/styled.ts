@@ -41,3 +41,23 @@ export const ForgetPassword = styled.Text`
   margin-right: 10%;
   color: ${({ theme }) => theme.colors.secondaryText};
 `;
+
+export const RegisterText = styled.Text`
+  font-size: 14px;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.secondaryText};
+`;
+
+export const Bold = styled.Text`
+  font-size: 14px;
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.primaryText};
+`;
+
+export const CompanyLogo = styled.Image.attrs({
+  resizeMode: "contain",
+})`
+  width: 100px;
+  margin: 0 auto;
+  margin-top: 50px;
+`;
