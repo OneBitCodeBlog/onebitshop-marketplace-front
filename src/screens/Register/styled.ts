@@ -16,3 +16,16 @@ export const Title = styled.Text`
   margin: 15px 0;
   text-align: center;
 `;
+
+export const AcceptTerms = styled.Text`
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.secondaryText};
+  text-align: center;
+`;
+
+export const CompanyLogo = styled.Image.attrs({
+  resizeMode: "contain",
+})`
+  width: 100px;
+  margin: 0 auto;
+`;
