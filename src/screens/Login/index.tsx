@@ -50,7 +50,7 @@ const Login = () => {
       />
       <RegisterText
         onPress={() => {
-          navigation.navigate("Home");
+          navigation.navigate("Register");
         }}
       >
         Você ainda não tem conta? <Bold>Registre-se aqui!</Bold>
