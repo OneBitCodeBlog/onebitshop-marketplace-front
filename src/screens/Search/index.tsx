@@ -5,15 +5,17 @@ import Header from "../../components/common/Header";
 import NavBar from "../../components/common/NavBar";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { PropsNavigationStack } from "../../routes";
+import ProductList from "../../components/common/ProductList";
 
 type Props = NativeStackScreenProps<PropsNavigationStack, "Search">;
 
 const Search = ({ route }: Props) => {
-  console.log(route?.params.query);
+  const query = route?.params.query;
 
   return (
     <Container>
       <Header />
+      <ProductList />
       <NavBar />
     </Container>
   );
