@@ -8,7 +8,7 @@ import Form from "../../components/UserProfile/Form";
 const UserProfile = () => {
   return (
     <>
-      <Container>
+      <Container contentContainerStyle={{ paddingBottom: 120 }}>
         <DefaultTitle fontSize={20} title="MEU PERFIL" />
 
         <ProfileInfo />
