@@ -1,10 +1,11 @@
 import React from "react";
-import { Container } from "./styled";
+import { Container, DeleteAcc, LogOutBtn, LogOutText } from "./styled";
 import NavBar from "../../components/common/NavBar";
 import DefaultTitle from "../../components/common/DefaultTitle";
 import ProfileInfo from "../../components/common/ProfileInfo";
 import Form from "../../components/UserProfile/Form";
 import UserAds from "../../components/UserProfile/UserAds";
+import { Alert } from "react-native";
 
 const Data = [
   {
@@ -34,6 +35,24 @@ const Data = [
 ];
 
 const UserProfile = () => {
+  const handleDeleteAcc = () => {
+    Alert.alert(
+      "Você tem certeza?",
+      "Ao fazer isso você excluirá sua conta para sempre",
+      [
+        {
+          text: "Sim",
+          onPress: () => {
+            Alert.alert("Você deletou a sua conta!");
+          },
+        },
+        {
+          text: "Não",
+        },
+      ]
+    );
+  };
+
   return (
     <>
       <Container contentContainerStyle={{ paddingBottom: 120 }}>
@@ -44,7 +63,14 @@ const UserProfile = () => {
         <Form />
 
         <UserAds product={Data} />
+
+        <LogOutBtn onPress={() => {}}>
+          <LogOutText>Sair da sua conta</LogOutText>
+        </LogOutBtn>
+
+        <DeleteAcc onPress={handleDeleteAcc}>Excluir conta</DeleteAcc>
       </Container>
+
       <NavBar />
     </>
   );
