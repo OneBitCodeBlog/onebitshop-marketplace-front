@@ -3,8 +3,8 @@ import { Container, DeleteAcc, LogOutBtn, LogOutText } from "./styled";
 import NavBar from "../../components/common/NavBar";
 import DefaultTitle from "../../components/common/DefaultTitle";
 import ProfileInfo from "../../components/common/ProfileInfo";
-import Form from "../../components/UserProfile/Form";
-import UserAds from "../../components/UserProfile/UserAds";
+import Form from "../../components/UserSellerProfile/Form";
+import UserAds from "../../components/UserSellerProfile/UserAds";
 import { Alert } from "react-native";
 
 const Data = [
@@ -62,7 +62,7 @@ const UserProfile = () => {
 
         <Form />
 
-        <UserAds product={Data} />
+        <UserAds product={Data} seller={false} />
 
         <LogOutBtn onPress={() => {}}>
           <LogOutText>Sair da sua conta</LogOutText>
