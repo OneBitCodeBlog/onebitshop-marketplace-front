@@ -6,7 +6,7 @@ const statusBarHeight = Constants.statusBarHeight;
 export const Container = styled.ScrollView`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.backgroundLight};
-  padding-top: ${statusBarHeight + 20}px;
+  padding-top: ${statusBarHeight}px;
 `;
 
 export const LogOutBtn = styled.TouchableOpacity`

@@ -8,6 +8,7 @@ import Login from "../screens/Login";
 import Register from "../screens/Register";
 import Search from "../screens/Search";
 import UserProfile from "../screens/UserProfile";
+import SellerProfile from "../screens/SellerProfile";
 
 export type PropsNavigationStack = {
   Home: undefined;
@@ -17,6 +18,7 @@ export type PropsNavigationStack = {
     query: string;
   };
   UserProfile: undefined;
+  SellerProfile: undefined;
 };
 
 const Stack = createNativeStackNavigator<PropsNavigationStack>();
@@ -31,6 +33,7 @@ const Routes = () => {
           headerShown: false,
         }}
       >
+        <Stack.Screen name="SellerProfile" component={SellerProfile} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Search" component={Search} />
         <Stack.Screen name="Login" component={Login} />
