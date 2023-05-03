@@ -8,3 +8,7 @@ export const Container = styled.ScrollView`
   background-color: ${({ theme }) => theme.colors.backgroundLight};
   padding-top: ${statusBarHeight}px;
 `;
+
+export const AdsContainer = styled.View`
+  margin: 20px 0px;
+`;
