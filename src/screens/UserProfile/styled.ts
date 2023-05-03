@@ -31,3 +31,11 @@ export const DeleteAcc = styled.Text`
   margin-top: 20px;
   color: ${({ theme }) => theme.colors.denounceButton};
 `;
+
+export const AddressText = styled.Text`
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.primaryText};
+`;
