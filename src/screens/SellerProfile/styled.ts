@@ -12,3 +12,10 @@ export const Container = styled.ScrollView`
 export const AdsContainer = styled.View`
   margin: 20px 0px;
 `;
+
+export const DenounceText = styled.Text`
+  font-size: 18px;
+  text-align: center;
+  margin-top: 20px;
+  color: ${({ theme }) => theme.colors.secondaryText};
+`;

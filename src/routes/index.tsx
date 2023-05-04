@@ -33,12 +33,12 @@ const Routes = () => {
           headerShown: false,
         }}
       >
-        <Stack.Screen name="SellerProfile" component={SellerProfile} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Search" component={Search} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="UserProfile" component={UserProfile} />
+        <Stack.Screen name="SellerProfile" component={SellerProfile} />
       </Stack.Navigator>
     </NavigationContainer>
   );
