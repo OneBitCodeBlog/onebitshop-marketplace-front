@@ -8,3 +8,28 @@ export const Container = styled.ScrollView`
   background-color: ${({ theme }) => theme.colors.backgroundLight};
   padding-top: ${statusBarHeight}px;
 `;
+
+export const NoAdd = styled.Text`
+  font-size: 24px;
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.primaryText};
+  text-align: center;
+  margin-top: 50%;
+  margin-bottom: 5%;
+`;
+
+export const CreateAddBtn = styled.TouchableOpacity`
+  width: 90%;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid ${({ theme }) => theme.colors.primaryButton};
+  margin: 0 auto;
+  border-radius: 5px;
+`;
+
+export const CreateAddBtnTxt = styled.Text`
+  font-size: 18px;
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.primaryText};
+`;
