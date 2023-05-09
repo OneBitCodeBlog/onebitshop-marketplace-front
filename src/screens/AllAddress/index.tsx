@@ -1,5 +1,11 @@
 import React from "react";
-import { Container, CreateAddBtn, CreateAddBtnTxt, NoAdd } from "./styled";
+import {
+  Container,
+  CreateAddBtn,
+  CreateAddBtnTxt,
+  ListHeight,
+  NoAdd,
+} from "./styled";
 import DefaultTitle from "../../components/common/DefaultTitle";
 import NavBar from "../../components/common/NavBar";
 import { FlatList, ListRenderItem, View } from "react-native";
@@ -47,9 +53,27 @@ const Data = [
     state: "AL",
     cep: "57037100",
   },
+  {
+    _id: "4",
+    street: "Rua das Jabuticabeiras",
+    number: "987",
+    complement: "",
+    district: "Mangabeiras",
+    city: "Maceió",
+    state: "AL",
+    cep: "57037100",
+  },
+  {
+    _id: "5",
+    street: "Rua das Jabuticabeiras",
+    number: "987",
+    complement: "",
+    district: "Mangabeiras",
+    city: "Maceió",
+    state: "AL",
+    cep: "57037100",
+  },
 ];
-
-// const Data: any = [];
 
 const AllAddress = () => {
   const renderItem: ListRenderItem<Address> = ({ item }) => (
@@ -69,12 +93,19 @@ const AllAddress = () => {
             </CreateAddBtn>
           </>
         ) : (
-          <FlatList
-            data={Data}
-            keyExtractor={(item: Address) => item._id}
-            renderItem={renderItem}
-            showsVerticalScrollIndicator={false}
-          />
+          <>
+            <ListHeight>
+              <FlatList
+                data={Data}
+                keyExtractor={(item: Address) => item._id}
+                renderItem={renderItem}
+                showsVerticalScrollIndicator={false}
+              />
+            </ListHeight>
+            <CreateAddBtn>
+              <CreateAddBtnTxt>Criar Endereço</CreateAddBtnTxt>
+            </CreateAddBtn>
+          </>
         )}
       </Container>
       <NavBar />

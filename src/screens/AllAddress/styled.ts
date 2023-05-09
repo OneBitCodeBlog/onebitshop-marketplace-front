@@ -33,3 +33,9 @@ export const CreateAddBtnTxt = styled.Text`
   font-weight: bold;
   color: ${({ theme }) => theme.colors.primaryText};
 `;
+
+export const ListHeight = styled.View`
+  min-height: 460px;
+  max-height: 460px;
+  margin-bottom: 30px;
+`;
