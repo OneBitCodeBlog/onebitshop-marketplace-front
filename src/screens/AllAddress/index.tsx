@@ -3,6 +3,7 @@ import { Container, CreateAddBtn, CreateAddBtnTxt, NoAdd } from "./styled";
 import DefaultTitle from "../../components/common/DefaultTitle";
 import NavBar from "../../components/common/NavBar";
 import { FlatList, ListRenderItem, View } from "react-native";
+import AddressCard from "./AddressCard";
 
 export interface Address {
   _id: string;
@@ -15,44 +16,44 @@ export interface Address {
   cep: string;
 }
 
-// const Data = [
-//   {
-//     _id: "1",
-//     street: "Rua das Acácias",
-//     number: "321",
-//     complement: "",
-//     district: "Boa Viagem",
-//     city: "Recife",
-//     state: "PE",
-//     cep: "51030200",
-//   },
-//   {
-//     _id: "2",
-//     street: "Avenida das Flores",
-//     number: "456",
-//     complement: "",
-//     district: "Centro",
-//     city: "Cuiabá",
-//     state: "MT",
-//     cep: "78005100",
-//   },
-//   {
-//     _id: "3",
-//     street: "Rua das Jabuticabeiras",
-//     number: "987",
-//     complement: "",
-//     district: "Mangabeiras",
-//     city: "Maceió",
-//     state: "AL",
-//     cep: "57037100",
-//   },
-// ];
+const Data = [
+  {
+    _id: "1",
+    street: "Rua das Acácias",
+    number: "321",
+    complement: "",
+    district: "Boa Viagem",
+    city: "Recife",
+    state: "PE",
+    cep: "51030200",
+  },
+  {
+    _id: "2",
+    street: "Avenida das Flores",
+    number: "456",
+    complement: "",
+    district: "Centro",
+    city: "Cuiabá",
+    state: "MT",
+    cep: "78005100",
+  },
+  {
+    _id: "3",
+    street: "Rua das Jabuticabeiras",
+    number: "987",
+    complement: "",
+    district: "Mangabeiras",
+    city: "Maceió",
+    state: "AL",
+    cep: "57037100",
+  },
+];
 
-const Data: any = [];
+// const Data: any = [];
 
 const AllAddress = () => {
   const renderItem: ListRenderItem<Address> = ({ item }) => (
-    <View item={item} />
+    <AddressCard item={item} />
   );
 
   return (
