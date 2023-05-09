@@ -25,5 +25,5 @@ export const DeleteIcon = styled.Image.attrs({
   resizeMode: "contain",
 })`
   width: 35px;
-  height: 35px;
+  height: 36px;
 `;
