@@ -1,5 +1,5 @@
 import React, { SetStateAction } from "react";
-import { Container, Icon, Title } from "./styled";
+import { Container, Icon, Image, ImageContainer, Title } from "./styled";
 import * as ImagePicker from "expo-image-picker";
 import { Alert } from "react-native";
 
@@ -21,17 +21,31 @@ const UploadInput = ({ images, setImages }: ImagesProps) => {
     });
 
     if (result.assets) {
-      setImages(result.assets);
+      const images = result.assets.slice(0, 6);
+
+      if (result.assets.length > 6) {
+        Alert.alert("Removemos as imagens adicionais. Limite de 6 imagens.");
+      }
+
+      setImages(images);
     } else {
       Alert.alert("Você não selecionou imagens");
     }
   };
 
   return (
-    <Container onPress={handlePickUpImage}>
-      <Title>UploadInput</Title>
-      <Icon source={uploadIcon} />
-    </Container>
+    <>
+      <Container onPress={handlePickUpImage}>
+        <Title>Selecione até 6 imagens.</Title>
+        <Icon source={uploadIcon} />
+      </Container>
+      <ImageContainer>
+        {images &&
+          images.map((image) => (
+            <Image key={image.assetId} source={{ uri: image.uri }} />
+          ))}
+      </ImageContainer>
+    </>
   );
 };
 
