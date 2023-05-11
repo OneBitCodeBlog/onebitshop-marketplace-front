@@ -37,7 +37,7 @@ const NavBar = () => {
       </IconButton>
       <IconButton
         onPress={() => {
-          navigation.navigate("Home");
+          navigation.navigate("Categories");
         }}
       >
         <Icon source={categories} />
