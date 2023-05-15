@@ -21,7 +21,13 @@ const ChatCard = ({ item }: any) => {
   const navigation = useNavigation<PropsStack>();
 
   return (
-    <Container onPress={() => {}}>
+    <Container
+      onPress={() => {
+        navigation.navigate("Chat", {
+          chatInfo: item,
+        });
+      }}
+    >
       <Image source={{ uri: item.product.images[0].url }} />
       <InfoContainer>
         <Price>R$ {item.product.price}</Price>
