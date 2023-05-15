@@ -23,7 +23,7 @@ const NavBar = () => {
       </IconButton>
       <IconButton
         onPress={() => {
-          navigation.navigate("Home");
+          navigation.navigate("AllChats");
         }}
       >
         <Icon source={chat} />
