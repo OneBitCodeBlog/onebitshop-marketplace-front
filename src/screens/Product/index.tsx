@@ -2,6 +2,7 @@ import React from "react";
 import {
   Button,
   Container,
+  DenounceSeller,
   InfoContainer,
   InteractionsContainer,
   Like,
@@ -82,6 +83,8 @@ const Product = () => {
         marginVertical={0}
         buttonHandle={() => {}}
       />
+
+      <DenounceSeller>Denunciar o vendedor!</DenounceSeller>
     </Container>
   );
 };

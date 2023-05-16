@@ -60,3 +60,10 @@ export const Share = styled.Image.attrs({
   width: 24px;
   margin-right: 15px;
 `;
+
+export const DenounceSeller = styled.Text`
+  font-size: 18px;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.secondaryText};
+  margin-top: 20px;
+`;
