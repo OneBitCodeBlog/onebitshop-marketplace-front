@@ -26,3 +26,37 @@ export const SubTitle = styled.Text`
   font-size: 14px;
   color: ${({ theme }) => theme.colors.secondaryText};
 `;
+
+export const InfoContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 30px;
+  align-items: center;
+`;
+
+export const Price = styled.Text`
+  font-size: 24px;
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.primaryText};
+`;
+
+export const InteractionsContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const Button = styled.TouchableOpacity``;
+
+export const Like = styled.Image.attrs({
+  resizeMode: "contain",
+})`
+  width: 30px;
+  margin-right: 15px;
+`;
+
+export const Share = styled.Image.attrs({
+  resizeMode: "contain",
+})`
+  width: 24px;
+  margin-right: 15px;
+`;

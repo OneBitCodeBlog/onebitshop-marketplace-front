@@ -1,5 +1,15 @@
 import React from "react";
-import { Container, SubTitle, SubtitleContainer } from "./styled";
+import {
+  Button,
+  Container,
+  InfoContainer,
+  InteractionsContainer,
+  Like,
+  Price,
+  Share,
+  SubTitle,
+  SubtitleContainer,
+} from "./styled";
 import BackIcon from "../../components/common/BackIcon";
 import { Title } from "./styled";
 import Carousel from "../../components/Product/Carousel";
@@ -23,6 +33,9 @@ const images = [
   },
 ];
 
+const like = require("../../../assets/icons/like.png");
+const share = require("../../../assets/icons/share.png");
+
 const Product = () => {
   return (
     <Container>
@@ -38,6 +51,20 @@ const Product = () => {
       </SubtitleContainer>
 
       <Carousel images={images} />
+
+      <InfoContainer>
+        <Price>R$ 2500</Price>
+
+        <InteractionsContainer>
+          <Button>
+            <Like source={like} />
+          </Button>
+
+          <Button>
+            <Share source={share} />
+          </Button>
+        </InteractionsContainer>
+      </InfoContainer>
     </Container>
   );
 };
