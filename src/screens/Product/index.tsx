@@ -14,6 +14,7 @@ import BackIcon from "../../components/common/BackIcon";
 import { Title } from "./styled";
 import Carousel from "../../components/Product/Carousel";
 import Description from "../../components/Product/Description";
+import SellerInfo from "../../components/Product/SellerInfo";
 
 const images = [
   {
@@ -71,6 +72,8 @@ const Product = () => {
       </InfoContainer>
 
       <Description desc={description} />
+
+      <SellerInfo />
     </Container>
   );
 };
