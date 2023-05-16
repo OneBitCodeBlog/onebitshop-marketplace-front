@@ -11,6 +11,8 @@ import {
   PublishedText,
   Title,
 } from "./styled";
+import { useNavigation } from "@react-navigation/native";
+import { PropsStack } from "../../../../routes";
 
 interface Props {
   product: Product;
@@ -19,8 +21,15 @@ interface Props {
 const likeImg = require("../../../../../assets/icons/like.png");
 
 const CategoryCard = ({ product }: Props) => {
+  const navigation = useNavigation<PropsStack>();
+
   return (
-    <Container activeOpacity={0.85} onPress={() => {}}>
+    <Container
+      activeOpacity={0.85}
+      onPress={() => {
+        navigation.navigate("Product");
+      }}
+    >
       <Image source={{ uri: product.productImage }} />
       <InfoContainer>
         <Price>R$ {product.price}</Price>
