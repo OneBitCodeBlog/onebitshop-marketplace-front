@@ -2,11 +2,11 @@ import React from "react";
 import { Container, SeeMore, Title, TitleContainer } from "./styled";
 import { Categorie, Product } from "../../../screens/Categories";
 import { FlatList, ListRenderItem } from "react-native";
-import CategorieCard from "./CategorieCard";
+import CategoryCard from "./CategoryCard";
 
 const CategoryList = ({ categorie }: Categorie) => {
   const renderItem: ListRenderItem<Product> = ({ item }) => {
-    return <CategorieCard product={item} key={item.id} />;
+    return <CategoryCard product={item} key={item.id} />;
   };
 
   return (

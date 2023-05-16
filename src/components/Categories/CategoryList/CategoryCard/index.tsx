@@ -18,7 +18,7 @@ interface ProductProps {
 
 const likeIcon = require("../../../../../assets/icons/like.png");
 
-const CategorieCard = ({ product }: ProductProps) => {
+const CategoryCard = ({ product }: ProductProps) => {
   return (
     <Container>
       <Image source={{ uri: product.productImage }} />
@@ -38,4 +38,4 @@ const CategorieCard = ({ product }: ProductProps) => {
   );
 };
 
-export default CategorieCard;
+export default CategoryCard;
