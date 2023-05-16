@@ -13,6 +13,7 @@ import {
 import BackIcon from "../../components/common/BackIcon";
 import { Title } from "./styled";
 import Carousel from "../../components/Product/Carousel";
+import Description from "../../components/Product/Description";
 
 const images = [
   {
@@ -37,6 +38,9 @@ const like = require("../../../assets/icons/like.png");
 const share = require("../../../assets/icons/share.png");
 
 const Product = () => {
+  const description =
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. In error quibusdam officia eos minima suscipit, necessitatibus, sequi hic quia quo quaerat? Quia facere deleniti minus necessitatibus veniam aut recusandae voluptatum labore eius suscipit tempore deserunt quae qui repellat, libero nostrum.";
+
   return (
     <Container>
       <BackIcon marginLeft={30} />
@@ -65,6 +69,8 @@ const Product = () => {
           </Button>
         </InteractionsContainer>
       </InfoContainer>
+
+      <Description desc={description} />
     </Container>
   );
 };
