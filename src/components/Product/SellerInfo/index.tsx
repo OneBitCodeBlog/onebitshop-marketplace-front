@@ -21,10 +21,20 @@ const SellerInfo = () => {
       <SellerContainer>
         <Name>Lucas Queiroga</Name>
 
-        <Button>
-          {!Rate ? (
-            <NoRate>Sem avaliação{"\n"}Avalie clicando aqui!</NoRate>
-          ) : (
+        {!Rate ? (
+          <NoRate
+            onPress={() => {
+              navigation.navigate("Feedback");
+            }}
+          >
+            Sem avaliação{"\n"}Clique e avalie!
+          </NoRate>
+        ) : (
+          <Button
+            onPress={() => {
+              navigation.navigate("Feedback");
+            }}
+          >
             <AirbnbRating
               selectedColor="#5F96ED"
               showRating={false}
@@ -35,8 +45,8 @@ const SellerInfo = () => {
                 marginLeft: -20,
               }}
             />
-          )}
-        </Button>
+          </Button>
+        )}
       </SellerContainer>
 
       <SeeProfile

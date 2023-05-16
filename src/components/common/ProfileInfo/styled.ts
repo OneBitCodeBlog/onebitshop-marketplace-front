@@ -42,3 +42,5 @@ export const Hr = styled.View`
   margin: 0 auto;
   margin-top: 20px;
 `;
+
+export const Button = styled.TouchableOpacity``;
