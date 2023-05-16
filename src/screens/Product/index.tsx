@@ -17,6 +17,8 @@ import Carousel from "../../components/Product/Carousel";
 import Description from "../../components/Product/Description";
 import SellerInfo from "../../components/Product/SellerInfo";
 import DefaultButton from "../../components/common/DefaultButton";
+import { useNavigation } from "@react-navigation/native";
+import { PropsStack } from "../../routes";
 
 const images = [
   {
@@ -41,6 +43,8 @@ const like = require("../../../assets/icons/like.png");
 const share = require("../../../assets/icons/share.png");
 
 const Product = () => {
+  const navigation = useNavigation<PropsStack>();
+
   const description =
     "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero assumenda, totam corrupti aut voluptatibus repellat ullam explicabo exercitationem tenetur doloribus quis expedita consectetur! Aliquam quo error excepturi minus voluptatem asperiores, distinctio voluptas eius pariatur repudiandae adipisci officia nisi temporibus facere unde similique et dolorum odio vitae iste libero quibusdam voluptates modi. Sed velit facere illum vitae aperiam sint fugit ut possimus magni quis quasi architecto obcaecati praesentium quam voluptatum eaque ullam sunt totam, molestiae nulla ipsa atque delectus. Odio, deleniti.;";
 
@@ -84,7 +88,13 @@ const Product = () => {
         buttonHandle={() => {}}
       />
 
-      <DenounceSeller>Denunciar o vendedor!</DenounceSeller>
+      <DenounceSeller
+        onPress={() => {
+          navigation.navigate("Denounce");
+        }}
+      >
+        Denunciar o vendedor!
+      </DenounceSeller>
     </Container>
   );
 };
