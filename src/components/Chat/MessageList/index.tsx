@@ -1,5 +1,6 @@
-import { ListRenderItem, FlatList } from "react-native";
 import React from "react";
+import { ListRenderItem, FlatList } from "react-native";
+import MessageCard from "./MessageCard";
 
 const MessageList = ({ messages }: any) => {
   const renderItem: ListRenderItem<any> = ({ item }) => (
