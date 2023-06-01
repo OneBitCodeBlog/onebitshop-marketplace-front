@@ -8,8 +8,6 @@ import CategoryList from "../../components/Category/CategoryList";
 type Props = NativeStackScreenProps<PropsNavigationStack, "Category">;
 
 const Category = ({ route }: Props) => {
-  console.log(route.params);
-
   return (
     <Container>
       <DefaultTitle title={route.params._id} fontSize={20} />
