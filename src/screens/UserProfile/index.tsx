@@ -74,7 +74,9 @@ const UserProfile = () => {
 
         <AddressText
           onPress={() => {
-            navigation.navigate("AllAddress");
+            navigation.navigate("AllAddress", {
+              newAddress: false,
+            });
           }}
         >
           Gerenciar Endereços

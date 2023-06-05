@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   CreateAddBtn,
@@ -11,65 +11,19 @@ import NavBar from "../../components/common/NavBar";
 import { FlatList, ListRenderItem, View } from "react-native";
 import AddressCard from "./AddressCard";
 import { useNavigation } from "@react-navigation/native";
-import { PropsStack } from "../../routes";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { PropsNavigationStack, PropsStack } from "../../routes";
 
 import { Address } from "../../entities/User";
+import addressSerivice from "../../services/addressService";
 
-const Data = [
-  {
-    _id: "1",
-    street: "Rua das Acácias",
-    number: "321",
-    complement: "",
-    district: "Boa Viagem",
-    city: "Recife",
-    state: "PE",
-    cep: "51030200",
-  },
-  {
-    _id: "2",
-    street: "Avenida das Flores",
-    number: "456",
-    complement: "",
-    district: "Centro",
-    city: "Cuiabá",
-    state: "MT",
-    cep: "78005100",
-  },
-  {
-    _id: "3",
-    street: "Rua das Jabuticabeiras",
-    number: "987",
-    complement: "",
-    district: "Mangabeiras",
-    city: "Maceió",
-    state: "AL",
-    cep: "57037100",
-  },
-  {
-    _id: "4",
-    street: "Rua das Jabuticabeiras",
-    number: "987",
-    complement: "",
-    district: "Mangabeiras",
-    city: "Maceió",
-    state: "AL",
-    cep: "57037100",
-  },
-  {
-    _id: "5",
-    street: "Rua das Jabuticabeiras",
-    number: "987",
-    complement: "",
-    district: "Mangabeiras",
-    city: "Maceió",
-    state: "AL",
-    cep: "57037100",
-  },
-];
+type Props = NativeStackScreenProps<PropsNavigationStack, "AllAddress">;
 
-const AllAddress = () => {
+const AllAddress = ({ route }: Props) => {
   const navigation = useNavigation<PropsStack>();
+  const [allAddress, setAllAddress] = useState<Address[]>([]);
+
+  const { newAddress } = route.params;
 
   const renderItem: ListRenderItem<Address> = ({ item }) => (
     <AddressCard item={item} />
@@ -79,12 +33,22 @@ const AllAddress = () => {
     navigation.navigate("AddAddress");
   };
 
+  const handleGetAddress = async () => {
+    const res = await addressSerivice.getAddress();
+
+    setAllAddress(res.data);
+  };
+
+  useEffect(() => {
+    handleGetAddress();
+  }, [newAddress]);
+
   return (
     <>
       <Container>
         <DefaultTitle title="TODOS OS ENDEREÇOS" fontSize={18} />
 
-        {Data.length <= 0 ? (
+        {allAddress.length <= 0 ? (
           <>
             <NoAdd>Você não tem endereços{"\n"}cadastrados no momento</NoAdd>
             <CreateAddBtn onPress={handleNavAddAddress}>
@@ -95,7 +59,7 @@ const AllAddress = () => {
           <>
             <ListHeight>
               <FlatList
-                data={Data}
+                data={allAddress}
                 keyExtractor={(item: Address) => item._id}
                 renderItem={renderItem}
                 showsVerticalScrollIndicator={false}
