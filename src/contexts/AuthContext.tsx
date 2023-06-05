@@ -54,6 +54,8 @@ interface AuthContextData extends AuthState {
     password: string,
     phone: string
   ) => Promise<void>;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
 }
 
 export const AuthContext = React.createContext<AuthContextData>(
