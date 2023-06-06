@@ -57,7 +57,7 @@ const Data = [
   },
 ];
 
-const ProductList = () => {
+const ProductList = ({ products, handleGetProducts }: any) => {
   const renderItem: ListRenderItem<Product> = ({ item }) => (
     <ProductCard data={item} />
   );

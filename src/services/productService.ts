@@ -46,6 +46,11 @@ const productService = {
 
     return res;
   },
+  getAllProducts: async (page: number) => {
+    const res = await api.get(`/products?page=${page}`);
+
+    return res.data;
+  },
 };
 
 export default productService;
