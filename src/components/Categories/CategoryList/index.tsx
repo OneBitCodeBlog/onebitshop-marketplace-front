@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, SeeMore, Title, TitleContainer } from "./styled";
-import { Categorie } from "../../../screens/Categories";
+import { Category } from "../../../screens/Categories";
 import { FlatList, ListRenderItem } from "react-native";
 import CategoryCard from "./CategoryCard";
 import { useNavigation } from "@react-navigation/native";
@@ -8,7 +8,11 @@ import { PropsStack } from "../../../routes";
 
 import { Product } from "../../../entities/Product";
 
-const CategoryList = ({ categorie }: Categorie) => {
+interface Props {
+  category: Category;
+}
+
+const CategoryList = ({ category }: Props) => {
   const navigation = useNavigation<PropsStack>();
 
   const renderItem: ListRenderItem<Product> = ({ item }) => {
@@ -18,12 +22,12 @@ const CategoryList = ({ categorie }: Categorie) => {
   return (
     <Container>
       <TitleContainer>
-        <Title>{categorie._id}</Title>
+        <Title>{category._id}</Title>
         <SeeMore
           onPress={() => {
             navigation.navigate("Category", {
-              _id: categorie._id,
-              products: categorie.product,
+              _id: category._id,
+              products: category.products,
             });
           }}
         >
@@ -32,7 +36,7 @@ const CategoryList = ({ categorie }: Categorie) => {
       </TitleContainer>
 
       <FlatList
-        data={categorie.product}
+        data={category.products}
         renderItem={renderItem}
         horizontal
         showsHorizontalScrollIndicator={false}

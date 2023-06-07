@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import { PropsStack } from "../../../../routes";
 
 import { Product } from "../../../../entities/Product";
+import getDate from "../../../../utils/getDate";
 
 interface Props {
   product: Product;
@@ -28,7 +29,9 @@ const CategoryCard = ({ product }: Props) => {
     <Container
       activeOpacity={0.85}
       onPress={() => {
-        navigation.navigate("Product");
+        navigation.navigate("Product", {
+          ...product,
+        });
       }}
     >
       <Image source={{ uri: product.images[0].url }} />
@@ -39,7 +42,7 @@ const CategoryCard = ({ product }: Props) => {
         <LikeContainer>
           <PublishedText>
             Publicado em{"\n"}
-            {product.publishedData}
+            {getDate(product.createdAt)}
           </PublishedText>
 
           <Button onPress={() => {}} activeOpacity={0.85}>
