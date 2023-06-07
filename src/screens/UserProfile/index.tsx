@@ -23,7 +23,6 @@ import { User } from "../../entities/User";
 const UserProfile = () => {
   const navigation = useNavigation<PropsStack>();
   const [userInfo, setUserInfo] = useState<User>();
-  const [loading, setLoading] = useState(true);
 
   const { logout } = useAuth();
 
@@ -31,7 +30,6 @@ const UserProfile = () => {
     const { data } = await profileService.getUserProfile();
 
     setUserInfo(data);
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -57,43 +55,37 @@ const UserProfile = () => {
   };
 
   if (!userInfo) {
-    return;
+    return <Loader />;
   }
 
   return (
     <>
-      {!loading ? (
-        <>
-          <Container contentContainerStyle={{ paddingBottom: 120 }}>
-            <DefaultTitle fontSize={20} title="MEU PERFIL" />
+      <Container contentContainerStyle={{ paddingBottom: 120 }}>
+        <DefaultTitle fontSize={20} title="MEU PERFIL" />
 
-            <ProfileInfo userInfo={userInfo} />
+        <ProfileInfo userInfo={userInfo} />
 
-            <Form userInfo={userInfo} />
+        <Form userInfo={userInfo} />
 
-            <AddressText
-              onPress={() => {
-                navigation.navigate("AllAddress", {
-                  newAddress: false,
-                });
-              }}
-            >
-              Gerenciar Endereços
-            </AddressText>
+        <AddressText
+          onPress={() => {
+            navigation.navigate("AllAddress", {
+              newAddress: false,
+            });
+          }}
+        >
+          Gerenciar Endereços
+        </AddressText>
 
-            {/* <UserAds product={Data} seller={false} /> */}
+        {/* <UserAds product={Data} seller={false} /> */}
 
-            <LogOutBtn onPress={logout}>
-              <LogOutText>Sair da sua conta</LogOutText>
-            </LogOutBtn>
+        <LogOutBtn onPress={logout}>
+          <LogOutText>Sair da sua conta</LogOutText>
+        </LogOutBtn>
 
-            <DeleteAcc onPress={handleDeleteAcc}>Excluir conta</DeleteAcc>
-          </Container>
-          <NavBar />
-        </>
-      ) : (
-        <Loader />
-      )}
+        <DeleteAcc onPress={handleDeleteAcc}>Excluir conta</DeleteAcc>
+      </Container>
+      <NavBar />
     </>
   );
 };
