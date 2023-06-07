@@ -10,31 +10,60 @@ import { Product } from "../../entities/Product";
 import searchService from "../../services/searchService";
 import Loader from "../Loader";
 import Filters from "../../components/Search/Filters";
+import { QueryContext } from "../../contexts/QueryContext";
 
 type Props = NativeStackScreenProps<PropsNavigationStack, "Search">;
 
 const Search = ({ route }: Props) => {
+  const [filters, setFilters] = useState<string[]>([]);
   const [data, setData] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
   const query = route?.params.query;
 
+  let joinedFilters = filters.join("&");
+
   const handleSearch = async () => {
-    const { data } = await searchService.getSearched(query);
+    const { data } = await searchService.getSearched(joinedFilters);
 
     setData(data.products);
     setLoading(false);
   };
 
+  const addFilters = (filter: string) => {
+    const newFilterParts = filter.split("=");
+
+    const newFilters = filters.map((f) => {
+      return f.startsWith(newFilterParts[0]) ? filter : f;
+    });
+
+    if (!newFilters.includes(filter)) {
+      newFilters.push(filter);
+    }
+
+    setFilters(newFilters);
+  };
+
+  const queryContextValue = {
+    filters,
+    addFilters,
+  };
+
   useEffect(() => {
-    handleSearch();
+    setFilters([query]);
   }, [query]);
+
+  useEffect(() => {
+    joinedFilters && handleSearch();
+  }, [joinedFilters]);
 
   return (
     <Container>
       <Header />
 
-      <Filters />
+      <QueryContext.Provider value={queryContextValue}>
+        <Filters />
+      </QueryContext.Provider>
 
       {!loading ? (
         data.length <= 0 ? (
