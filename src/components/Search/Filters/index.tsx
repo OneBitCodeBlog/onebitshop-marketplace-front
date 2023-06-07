@@ -76,7 +76,9 @@ const Filters = () => {
         </FiltersContainer>
       </Container>
 
-      {!showFilters ? null : <ComplementFilters />}
+      {!showFilters ? null : (
+        <ComplementFilters setShowFilters={setShowFilters} />
+      )}
     </>
   );
 };

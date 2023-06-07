@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Container, NoResult } from "./styled";
 import Header from "../../components/common/Header";
@@ -22,6 +21,8 @@ const Search = ({ route }: Props) => {
   const query = route?.params.query;
 
   let joinedFilters = filters.join("&");
+
+  console.log(joinedFilters);
 
   const handleSearch = async () => {
     const { data } = await searchService.getSearched(joinedFilters);
