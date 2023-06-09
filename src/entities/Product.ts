@@ -12,6 +12,7 @@ export interface Seller {
   email: string;
   name: string;
   phone: string;
+  rating: string;
 }
 
 export interface Product {
