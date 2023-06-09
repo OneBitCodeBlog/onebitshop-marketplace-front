@@ -24,6 +24,8 @@ import getDate from "../../utils/getDate";
 import favoriteService from "../../services/favoriteService";
 import { Product as ProductType } from "../../entities/Product";
 import Like from "../../components/common/Like";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import chatService from "../../services/chatService";
 
 const like = require("../../../assets/icons/like.png");
 const share = require("../../../assets/icons/share.png");
@@ -50,7 +52,36 @@ const Product = ({ route }: Props) => {
     setLiked(liked);
   };
 
-  const { params } = route;
+  const handleChatSeller = async () => {
+    const user = await AsyncStorage.getItem("user");
+    const { _id } = JSON.parse(user || "");
+
+    const initialMessage = `Olá, quero saber mais sobre o seu produto, ${route.params.seller.name}`;
+
+    const params = {
+      product: route.params._id,
+      seller: route.params.seller._id,
+      initialMessage,
+    };
+
+    const res = await chatService.startChat(params);
+
+    if (res.status === 201) {
+      navigation.navigate("Chat", {
+        product: route.params,
+        sellerName: route.params.seller.name,
+        sellerId: route.params.seller._id,
+        buyerId: _id,
+        messages: [
+          {
+            content: initialMessage,
+            receiver: route.params.seller._id,
+            sender: _id,
+          },
+        ],
+      });
+    }
+  };
 
   useEffect(() => {
     handleGetFavorites();
@@ -60,18 +91,18 @@ const Product = ({ route }: Props) => {
     <Container contentContainerStyle={{ paddingBottom: 50 }}>
       <BackIcon marginLeft={30} />
 
-      <Title>{params.name}</Title>
+      <Title>{route.params.name}</Title>
       <SubtitleContainer>
-        <SubTitle>Publicado em {getDate(params.createdAt)}</SubTitle>
+        <SubTitle>Publicado em {getDate(route.params.createdAt)}</SubTitle>
         <SubTitle>
           {route.params.address.city}, {route.params.address.state}
         </SubTitle>
       </SubtitleContainer>
 
-      <Carousel images={params.images} />
+      <Carousel images={route.params.images} />
 
       <InfoContainer>
-        <Price>R$ {params.price}</Price>
+        <Price>R$ {route.params.price}</Price>
 
         <InteractionsContainer>
           <Like favorites={liked} productId={route.params._id} />
@@ -82,7 +113,7 @@ const Product = ({ route }: Props) => {
         </InteractionsContainer>
       </InfoContainer>
 
-      <Description desc={params.description} />
+      <Description desc={route.params.description} />
 
       <SellerInfo product={route.params} />
 
@@ -90,7 +121,7 @@ const Product = ({ route }: Props) => {
         buttonText="FALE COM O VENDEDOR"
         buttonType={"primary"}
         marginVertical={0}
-        buttonHandle={() => {}}
+        buttonHandle={handleChatSeller}
       />
 
       <DenounceSeller
