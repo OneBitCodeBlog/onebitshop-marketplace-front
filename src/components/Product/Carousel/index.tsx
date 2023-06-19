@@ -1,13 +1,10 @@
-import { View, Text, Dimensions, FlatList, ListRenderItem } from "react-native";
+import { Dimensions, FlatList, ListRenderItem } from "react-native";
 import React from "react";
 import { Container, ProductImage } from "./styled";
 
-const { width } = Dimensions.get("window");
+import { Image } from "../../../entities/Product";
 
-export interface Image {
-  filename: string;
-  url: string;
-}
+const { width } = Dimensions.get("window");
 
 export interface CarouselProps {
   images: Image[];

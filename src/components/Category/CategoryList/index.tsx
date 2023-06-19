@@ -1,7 +1,8 @@
 import { FlatList, ListRenderItem } from "react-native";
 import React from "react";
-import { Product } from "../../../screens/Categories";
 import CategoryCard from "./CategoryCard";
+
+import { Product } from "../../../entities/Product";
 
 interface Props {
   products: Product[];

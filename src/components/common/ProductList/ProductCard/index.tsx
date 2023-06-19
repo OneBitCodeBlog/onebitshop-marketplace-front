@@ -14,15 +14,16 @@ import {
   SellerName,
 } from "./styled";
 import { Alert } from "react-native";
-import { ProductType } from "..";
 import { useNavigation } from "@react-navigation/native";
 import { PropsStack } from "../../../../routes";
+
+import { Product } from "../../../../entities/Product";
 
 const like = require("../../../../../assets/icons/like.png");
 const liked = require("../../../../../assets/icons/liked.png");
 
 interface DataProps {
-  data: ProductType;
+  data: Product;
 }
 
 const ProductCard = ({ data }: DataProps) => {
@@ -37,7 +38,7 @@ const ProductCard = ({ data }: DataProps) => {
     >
       <ProductImage
         source={{
-          uri: data.productImage,
+          uri: data.images[0].url,
         }}
       />
       <ProductInfoContainer>
@@ -50,21 +51,16 @@ const ProductCard = ({ data }: DataProps) => {
             <PublishedText>
               Publicado em {data.publishedData} por:
             </PublishedText>
-            <SellerName>{data.SellerName}</SellerName>
+            <SellerName>{data.Seller.name}</SellerName>
           </SellerInfoContainer>
-          {!data.liked ? (
-            <LikeButton
-              onPress={() => {
-                Alert.alert("Você deu Like");
-              }}
-            >
-              <LikeIcon source={like} />
-            </LikeButton>
-          ) : (
-            <LikeButton>
-              <LikeIcon source={liked} />
-            </LikeButton>
-          )}
+
+          <LikeButton
+            onPress={() => {
+              Alert.alert("Você deu Like");
+            }}
+          >
+            <LikeIcon source={like} />
+          </LikeButton>
         </InfoLikeContainer>
       </ProductInfoContainer>
     </Container>

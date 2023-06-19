@@ -9,10 +9,11 @@ import {
   TextContainer,
   Title,
 } from "./styled";
-import { Product } from "../../../../screens/Categories";
 import { LikeIcon } from "../../../common/ProductList/styled";
 import { useNavigation } from "@react-navigation/native";
 import { PropsStack } from "../../../../routes";
+
+import { Product } from "../../../../entities/Product";
 
 interface ProductProps {
   product: Product;
@@ -29,9 +30,9 @@ const CategoryCard = ({ product }: ProductProps) => {
         navigation.navigate("Product");
       }}
     >
-      <Image source={{ uri: product.productImage }} />
+      <Image source={{ uri: product.images[0].url }} />
       <TextContainer>
-        <Title>{product.title}</Title>
+        <Title>{product.name}</Title>
         <Price>R$ {product.price}</Price>
 
         <SellerLikeContainer>

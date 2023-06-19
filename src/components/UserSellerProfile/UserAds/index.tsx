@@ -17,16 +17,10 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { PropsStack } from "../../../routes";
 
+import { Product } from "../../../entities/Product";
+
 const trashIcon = require("../../../../assets/icons/trash.png");
 const favoriteIcon = require("../../../../assets/icons/like.png");
-
-interface Product {
-  id: string;
-  productImage: string;
-  price: string;
-  title: string;
-  publishedData: string;
-}
 
 interface ProductProps {
   product: Product[];
@@ -51,20 +45,20 @@ const UserAds = ({ product, seller }: ProductProps) => {
       {product.length > 0 ? (
         product.map((product) => (
           <Card
-            key={product.id}
+            key={product._id}
             activeOpacity={0.85}
             onPress={handleEditProduct}
           >
             <Image
               source={{
-                uri: product.productImage,
+                uri: product.images[0].url,
               }}
             />
 
             <InfoContainer>
               <PriceTitleContainer>
                 <Price>R$ {product.price}</Price>
-                <Title numberOfLines={2}>{product.title}</Title>
+                <Title numberOfLines={2}>{product.name}</Title>
               </PriceTitleContainer>
 
               {!seller ? (
