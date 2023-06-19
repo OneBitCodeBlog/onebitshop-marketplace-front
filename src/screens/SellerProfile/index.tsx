@@ -7,6 +7,7 @@ import DefaultButton from "../../components/common/DefaultButton";
 import NavBar from "../../components/common/NavBar";
 import { useNavigation } from "@react-navigation/native";
 import { PropsStack } from "../../routes";
+import useAuth from "../../hook/useAuth";
 
 const Data = [
   {
@@ -37,6 +38,7 @@ const Data = [
 
 const SellerProfile = () => {
   const navigation = useNavigation<PropsStack>();
+  const { token } = useAuth();
 
   return (
     <>
@@ -54,7 +56,9 @@ const SellerProfile = () => {
         />
         <DenounceText
           onPress={() => {
-            navigation.navigate("Denounce");
+            !token
+              ? navigation.navigate("Login")
+              : navigation.navigate("Denounce");
           }}
         >
           Achou algo estranho? Denuncie Aqui!

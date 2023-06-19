@@ -34,7 +34,7 @@ const ChatHeader = ({ sellerName, product }: any) => {
   };
 
   const handleDenounce = () => {
-    navigation.navigate("Feedback");
+    navigation.navigate("Denounce");
   };
 
   return (
