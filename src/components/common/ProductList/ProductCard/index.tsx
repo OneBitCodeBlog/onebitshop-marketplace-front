@@ -36,11 +36,11 @@ const ProductCard = ({ data }: DataProps) => {
         navigation.navigate("Product");
       }}
     >
-      <ProductImage
+      {/* <ProductImage
         source={{
           uri: data.images[0].url,
         }}
-      />
+      /> */}
       <ProductInfoContainer>
         <ProductPriceTitleContainer>
           <ProductPrice>R$ {data.price}</ProductPrice>
@@ -51,7 +51,7 @@ const ProductCard = ({ data }: DataProps) => {
             <PublishedText>
               Publicado em {data.publishedData} por:
             </PublishedText>
-            <SellerName>{data.Seller.name}</SellerName>
+            {/* <SellerName>{data.Seller.name}</SellerName> */}
           </SellerInfoContainer>
 
           <LikeButton
