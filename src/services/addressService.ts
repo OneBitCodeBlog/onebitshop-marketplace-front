@@ -11,7 +11,7 @@ interface AddressParams {
   cep: string;
 }
 
-const addressSerivice = {
+const addressService = {
   addAddress: async (params: AddressParams) => {
     const token = await SecureStore.getItemAsync("onebitshop-token");
     const res = await api.post("/addresses", params, {
@@ -45,4 +45,4 @@ const addressSerivice = {
   },
 };
 
-export default addressSerivice;
+export default addressService;

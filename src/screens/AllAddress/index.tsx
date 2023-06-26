@@ -15,7 +15,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { PropsNavigationStack, PropsStack } from "../../routes";
 
 import { Address } from "../../entities/User";
-import addressSerivice from "../../services/addressService";
+import addressService from "../../services/addressService";
 
 type Props = NativeStackScreenProps<PropsNavigationStack, "AllAddress">;
 
@@ -26,7 +26,7 @@ const AllAddress = ({ route }: Props) => {
   const { newAddress } = route.params;
 
   const renderItem: ListRenderItem<Address> = ({ item }) => (
-    <AddressCard item={item} />
+    <AddressCard item={item} address={allAddress} setAddress={setAllAddress} />
   );
 
   const handleNavAddAddress = () => {
@@ -34,7 +34,7 @@ const AllAddress = ({ route }: Props) => {
   };
 
   const handleGetAddress = async () => {
-    const res = await addressSerivice.getAddress();
+    const res = await addressService.getAddress();
 
     setAllAddress(res.data);
   };

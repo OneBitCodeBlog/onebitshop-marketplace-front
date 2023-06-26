@@ -4,7 +4,7 @@ import DefaultTitle from "../../components/common/DefaultTitle";
 import DefaultButton from "../../components/common/DefaultButton";
 import axios from "axios";
 import { Alert } from "react-native";
-import addressSerivice from "../../services/addressService";
+import addressService from "../../services/addressService";
 import { useNavigation } from "@react-navigation/native";
 import { PropsStack } from "../../routes";
 
@@ -50,7 +50,7 @@ const AddAddress = () => {
     }
 
     const params = fields;
-    const data = await addressSerivice.addAddress(params);
+    const data = await addressService.addAddress(params);
 
     if (data.status === 201) {
       navigation.navigate("AllAddress", {
