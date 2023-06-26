@@ -12,13 +12,8 @@ import DropDownComponent from "../../components/common/DropDownComponent";
 import DefaultButton from "../../components/common/DefaultButton";
 import UploadInput from "../../components/AddProduct/UploadInput";
 import { ImagePickerAsset } from "expo-image-picker";
-
-const Address = [
-  { value: "Endereço 1" },
-  { value: "Endereço 2" },
-  { value: "Endereço 3" },
-  { value: "Endereço 4" },
-];
+import addressService from "../../services/addressService";
+import { Address } from "../../entities/User";
 
 const Category = [
   { value: "Eletrônicos" },
@@ -33,7 +28,8 @@ const Category = [
 
 const AddProduct = () => {
   const [category, setCategory] = useState("");
-  const [address, setAddress] = useState("");
+  const [addressId, setAddressId] = useState("");
+  const [address, setAddress] = useState([]);
   const [images, setImages] = useState<ImagePickerAsset[]>([]);
   const [fields, setFields] = useState({
     title: "",
@@ -44,6 +40,19 @@ const AddProduct = () => {
     addressId: "",
   });
 
+  const handleGetAddress = async () => {
+    const res = await addressService.getAddress();
+
+    const value = res.data.map((address: Address) => {
+      return {
+        key: address._id,
+        value: `${address.street} Nº ${address.number}`,
+      };
+    });
+
+    setAddress(value);
+  };
+
   const handleSubmitProduct = () => {
     console.log(fields);
   };
@@ -53,9 +62,13 @@ const AddProduct = () => {
       ...fields,
       images: images,
       category: category,
-      addressId: address,
+      addressId: addressId,
     });
   }, [images, category, address]);
+
+  useEffect(() => {
+    handleGetAddress();
+  }, []);
 
   return (
     <Container contentContainerStyle={{ paddingBottom: 120 }}>
@@ -110,9 +123,9 @@ const AddProduct = () => {
       />
 
       <DropDownComponent
-        data={Address}
+        data={address}
         placeholder="Selecione um endereço"
-        setSelected={setAddress}
+        setSelected={setAddressId}
       />
 
       <DefaultButton
