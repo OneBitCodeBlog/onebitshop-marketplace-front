@@ -16,7 +16,7 @@ export interface Seller {
 
 export interface Product {
   _id: string;
-  Seller: Seller;
+  seller: Seller;
   price: string;
   name: string;
   description: string;

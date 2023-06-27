@@ -18,6 +18,7 @@ import { useNavigation } from "@react-navigation/native";
 import { PropsStack } from "../../../../routes";
 
 import { Product } from "../../../../entities/Product";
+import getDate from "../../../../utils/getDate";
 
 const like = require("../../../../../assets/icons/like.png");
 const liked = require("../../../../../assets/icons/liked.png");
@@ -36,11 +37,11 @@ const ProductCard = ({ data }: DataProps) => {
         navigation.navigate("Product");
       }}
     >
-      {/* <ProductImage
+      <ProductImage
         source={{
           uri: data.images[0].url,
         }}
-      /> */}
+      />
       <ProductInfoContainer>
         <ProductPriceTitleContainer>
           <ProductPrice>R$ {data.price}</ProductPrice>
@@ -49,9 +50,9 @@ const ProductCard = ({ data }: DataProps) => {
         <InfoLikeContainer>
           <SellerInfoContainer>
             <PublishedText>
-              Publicado em {data.publishedData} por:
+              Publicado em {getDate(data.createdAt)} por:
             </PublishedText>
-            {/* <SellerName>{data.Seller.name}</SellerName> */}
+            <SellerName>{data.seller.name}</SellerName>
           </SellerInfoContainer>
 
           <LikeButton
