@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import {
   Container,
@@ -14,6 +14,9 @@ import UploadInput from "../../components/AddProduct/UploadInput";
 import { ImagePickerAsset } from "expo-image-picker";
 import addressService from "../../services/addressService";
 import { Address } from "../../entities/User";
+import productService from "../../services/productService";
+import { useNavigation } from "@react-navigation/native";
+import { PropsStack } from "../../routes";
 
 const Category = [
   { value: "Eletrônicos" },
@@ -27,12 +30,13 @@ const Category = [
 ];
 
 const AddProduct = () => {
+  const navigation = useNavigation<PropsStack>();
   const [category, setCategory] = useState("");
   const [addressId, setAddressId] = useState("");
   const [address, setAddress] = useState([]);
   const [images, setImages] = useState<ImagePickerAsset[]>([]);
   const [fields, setFields] = useState({
-    title: "",
+    name: "",
     price: "",
     description: "",
     images: [{}],
@@ -53,8 +57,33 @@ const AddProduct = () => {
     setAddress(value);
   };
 
-  const handleSubmitProduct = () => {
-    console.log(fields);
+  const handleSubmitProduct = async (post: string) => {
+    if (
+      Object.values(fields).some((value) => !value || !fields.images.length)
+    ) {
+      Alert.alert("Um dos seus campos está vazio");
+
+      return;
+    }
+
+    const params = {
+      ...fields,
+      images: images.map(({ uri }) => ({
+        filename: uri.substring(uri.lastIndexOf("/") + 1),
+        uri,
+        url: "",
+        type: `image/${uri.split(".").slice(-1).toString()}`,
+      })),
+      published: post,
+    };
+
+    const { status } = await productService.addProduct(params);
+
+    if (status === 201) {
+      Alert.alert("Seu produto foi cadastado com sucesso!");
+
+      navigation.navigate("Home");
+    }
   };
 
   useEffect(() => {
@@ -64,7 +93,7 @@ const AddProduct = () => {
       category: category,
       addressId: addressId,
     });
-  }, [images, category, address]);
+  }, [images, category, addressId]);
 
   useEffect(() => {
     handleGetAddress();
@@ -77,11 +106,11 @@ const AddProduct = () => {
       <InputContainer>
         <Input
           placeholder="Título"
-          value={fields.title}
+          value={fields.name}
           onChangeText={(val) => {
             setFields({
               ...fields,
-              title: val,
+              name: val,
             });
           }}
         />
@@ -131,7 +160,9 @@ const AddProduct = () => {
       <DefaultButton
         buttonText="CADASTRAR E PUBLICAR"
         buttonType="primary"
-        buttonHandle={handleSubmitProduct}
+        buttonHandle={() => {
+          handleSubmitProduct("true");
+        }}
         marginVertical={20}
       />
 
@@ -140,7 +171,9 @@ const AddProduct = () => {
       <DefaultButton
         buttonText="SALVAR COMO RASCUNHO"
         buttonType="secondary"
-        buttonHandle={() => {}}
+        buttonHandle={() => {
+          handleSubmitProduct("false");
+        }}
         marginVertical={20}
       />
     </Container>
