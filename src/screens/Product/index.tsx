@@ -18,8 +18,9 @@ import Description from "../../components/Product/Description";
 import SellerInfo from "../../components/Product/SellerInfo";
 import DefaultButton from "../../components/common/DefaultButton";
 import { useNavigation } from "@react-navigation/native";
-import { PropsStack } from "../../routes";
+import { PropsNavigationStack, PropsStack } from "../../routes";
 import useAuth from "../../hook/useAuth";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 const images = [
   {
@@ -43,7 +44,11 @@ const images = [
 const like = require("../../../assets/icons/like.png");
 const share = require("../../../assets/icons/share.png");
 
-const Product = () => {
+type Props = NativeStackScreenProps<PropsNavigationStack, "Product">;
+
+const Product = ({ route }: Props) => {
+  console.log(route.params);
+
   const navigation = useNavigation<PropsStack>();
   const { token } = useAuth();
 
