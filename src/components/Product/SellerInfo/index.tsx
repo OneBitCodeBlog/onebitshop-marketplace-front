@@ -12,16 +12,20 @@ import { PropsStack } from "../../../routes";
 import { AirbnbRating } from "react-native-ratings";
 import useAuth from "../../../hook/useAuth";
 
-const SellerInfo = () => {
+interface Props {
+  name: string;
+}
+
+const SellerInfo = ({ name }: Props) => {
   const navigation = useNavigation<PropsStack>();
   const { token } = useAuth();
 
-  const Rate = 3;
+  const Rate = null;
 
   return (
     <Container>
       <SellerContainer>
-        <Name>Lucas Queiroga</Name>
+        <Name>{name}</Name>
 
         {!Rate ? (
           <NoRate
@@ -47,9 +51,6 @@ const SellerInfo = () => {
               isDisabled={true}
               size={16}
               defaultRating={Rate}
-              starContainerStyle={{
-                marginLeft: -20,
-              }}
             />
           </Button>
         )}
