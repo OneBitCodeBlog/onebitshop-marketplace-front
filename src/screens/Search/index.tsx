@@ -9,6 +9,7 @@ import ProductList from "../../components/common/ProductList";
 import { Product } from "../../entities/Product";
 import searchService from "../../services/searchService";
 import Loader from "../Loader";
+import Filters from "../../components/Search/Filters";
 
 type Props = NativeStackScreenProps<PropsNavigationStack, "Search">;
 
@@ -32,6 +33,8 @@ const Search = ({ route }: Props) => {
   return (
     <Container>
       <Header />
+
+      <Filters />
 
       {!loading ? (
         data.length <= 0 ? (
