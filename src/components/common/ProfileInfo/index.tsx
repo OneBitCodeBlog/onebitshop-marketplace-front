@@ -24,7 +24,7 @@ interface Props {
 const ProfileInfo = ({ userInfo }: Props) => {
   const navigation = useNavigation<PropsStack>();
   const { token } = useAuth();
-  console.log(userInfo);
+
   const Rate = userInfo.avarageRating;
 
   return (
