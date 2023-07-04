@@ -19,15 +19,17 @@ import { PropsStack } from "../../../../routes";
 
 import { Product } from "../../../../entities/Product";
 import getDate from "../../../../utils/getDate";
+import Like from "../../Like";
 
 const like = require("../../../../../assets/icons/like.png");
 const liked = require("../../../../../assets/icons/liked.png");
 
 interface DataProps {
   data: Product;
+  favorite: boolean;
 }
 
-const ProductCard = ({ data }: DataProps) => {
+const ProductCard = ({ data, favorite }: DataProps) => {
   const navigation = useNavigation<PropsStack>();
 
   return (
@@ -56,14 +58,7 @@ const ProductCard = ({ data }: DataProps) => {
             </PublishedText>
             <SellerName>{data.seller.name}</SellerName>
           </SellerInfoContainer>
-
-          <LikeButton
-            onPress={() => {
-              Alert.alert("Você deu Like");
-            }}
-          >
-            <LikeIcon source={like} />
-          </LikeButton>
+          <Like favorites={favorite} productId={data._id} />
         </InfoLikeContainer>
       </ProductInfoContainer>
     </Container>

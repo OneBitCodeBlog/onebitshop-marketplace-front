@@ -2,26 +2,24 @@ import React from "react";
 import {
   Container,
   Image,
-  LikeButton,
   Price,
   SellerLikeContainer,
   SellerName,
   TextContainer,
   Title,
 } from "./styled";
-import { LikeIcon } from "../../../common/ProductList/styled";
 import { useNavigation } from "@react-navigation/native";
 import { PropsStack } from "../../../../routes";
 
 import { Product } from "../../../../entities/Product";
+import Like from "../../../common/Like";
 
 interface ProductProps {
   product: Product;
+  favorite: boolean;
 }
 
-const likeIcon = require("../../../../../assets/icons/like.png");
-
-const CategoryCard = ({ product }: ProductProps) => {
+const CategoryCard = ({ product, favorite }: ProductProps) => {
   const navigation = useNavigation<PropsStack>();
 
   return (
@@ -40,9 +38,7 @@ const CategoryCard = ({ product }: ProductProps) => {
         <SellerLikeContainer>
           <SellerName>Lucas Queiroga</SellerName>
 
-          <LikeButton>
-            <LikeIcon source={likeIcon} />
-          </LikeButton>
+          <Like favorites={favorite} productId={product._id} />
         </SellerLikeContainer>
       </TextContainer>
     </Container>
