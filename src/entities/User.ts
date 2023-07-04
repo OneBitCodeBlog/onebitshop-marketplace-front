@@ -1,3 +1,5 @@
+import { Product } from "./Product";
+
 export interface Address {
   _id: string;
   cep: string;
@@ -15,6 +17,7 @@ export interface User {
   email: string;
   phone: string;
   createdAt: string;
+  products: Product[];
   address: Address[];
   avarageRating: number | null;
   favorites: string[];

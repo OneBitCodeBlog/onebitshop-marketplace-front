@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   AddressText,
   Container,
@@ -14,36 +14,29 @@ import UserAds from "../../components/UserSellerProfile/UserAds";
 import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { PropsStack } from "../../routes";
-
-const Data = [
-  {
-    id: "1",
-    productImage:
-      "https://http2.mlstatic.com/D_NQ_NP_715237-MLA45308505060_032021-O.jpg",
-    price: "2600",
-    title: "Playstation 4 novo com 3 jogos acompanhando",
-    publishedData: "14/02/23",
-  },
-  {
-    id: "2",
-    productImage:
-      "https://m.media-amazon.com/images/I/61hJ40qZKKL._AC_SX679_.jpg",
-    price: "2600",
-    title: "Playstation 5 novo com 1 jogo acompanhando",
-    publishedData: "14/02/23",
-  },
-  {
-    id: "3",
-    productImage:
-      "https://http2.mlstatic.com/D_NQ_NP_715237-MLA45308505060_032021-O.jpg",
-    price: "2600",
-    title: "Playstation 4 novo com 2 jogos acompanhando",
-    publishedData: "14/02/23",
-  },
-];
+import { Seller } from "../../entities/Product";
+import useAuth from "../../hook/useAuth";
+import profileService from "../../services/profileService";
+import Loader from "../Loader";
+import { User } from "../../entities/User";
 
 const UserProfile = () => {
   const navigation = useNavigation<PropsStack>();
+  const [userInfo, setUserInfo] = useState<User>();
+  const [loading, setLoading] = useState(true);
+
+  const { logout } = useAuth();
+
+  const handleUserInfos = async () => {
+    const { data } = await profileService.getUserProfile();
+
+    setUserInfo(data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    handleUserInfos();
+  }, []);
 
   const handleDeleteAcc = () => {
     Alert.alert(
@@ -63,35 +56,44 @@ const UserProfile = () => {
     );
   };
 
+  if (!userInfo) {
+    return;
+  }
+
   return (
     <>
-      <Container contentContainerStyle={{ paddingBottom: 120 }}>
-        <DefaultTitle fontSize={20} title="MEU PERFIL" />
+      {!loading ? (
+        <>
+          <Container contentContainerStyle={{ paddingBottom: 120 }}>
+            <DefaultTitle fontSize={20} title="MEU PERFIL" />
 
-        <ProfileInfo />
+            <ProfileInfo userInfo={userInfo} />
 
-        <Form />
+            <Form userInfo={userInfo} />
 
-        <AddressText
-          onPress={() => {
-            navigation.navigate("AllAddress", {
-              newAddress: false,
-            });
-          }}
-        >
-          Gerenciar Endereços
-        </AddressText>
+            <AddressText
+              onPress={() => {
+                navigation.navigate("AllAddress", {
+                  newAddress: false,
+                });
+              }}
+            >
+              Gerenciar Endereços
+            </AddressText>
 
-        {/* <UserAds product={Data} seller={false} /> */}
+            {/* <UserAds product={Data} seller={false} /> */}
 
-        <LogOutBtn onPress={() => {}}>
-          <LogOutText>Sair da sua conta</LogOutText>
-        </LogOutBtn>
+            <LogOutBtn onPress={logout}>
+              <LogOutText>Sair da sua conta</LogOutText>
+            </LogOutBtn>
 
-        <DeleteAcc onPress={handleDeleteAcc}>Excluir conta</DeleteAcc>
-      </Container>
-
-      <NavBar />
+            <DeleteAcc onPress={handleDeleteAcc}>Excluir conta</DeleteAcc>
+          </Container>
+          <NavBar />
+        </>
+      ) : (
+        <Loader />
+      )}
     </>
   );
 };
