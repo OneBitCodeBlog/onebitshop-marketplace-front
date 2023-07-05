@@ -14,30 +14,41 @@ import {
 } from "./styled";
 import { useNavigation } from "@react-navigation/native";
 import { PropsStack } from "../../../../routes";
+import { Chats } from "../../../../entities/Messages";
+import getDate from "../../../../utils/getDate";
 
 const trashIcon = require("../../../../../assets/icons/trash.png");
 
-const ChatCard = ({ item }: any) => {
+interface Props {
+  data: Chats;
+}
+
+const ChatCard = ({ data }: Props) => {
   const navigation = useNavigation<PropsStack>();
 
   return (
     <Container
       onPress={() => {
         navigation.navigate("Chat", {
-          chatInfo: item,
+          _id: data._id,
+          product: data.product,
+          sellerName: data.seller.name,
+          sellerId: data.seller._id,
+          buyerId: data.buyer._id,
+          messages: data.messages,
         });
       }}
     >
-      <Image source={{ uri: item.product.images[0].url }} />
+      <Image source={{ uri: data.product.images[0].url }} />
       <InfoContainer>
-        <Price>R$ {item.product.price}</Price>
-        <Title numberOfLines={2}>{item.product.name}</Title>
+        <Price>R$ {data.product.price}</Price>
+        <Title numberOfLines={2}>{data.product.name}</Title>
         <SellerTrashContainer>
           <SellerContainer>
             <PublishedText>
-              Publicado em {item.product.createdAt} por:
+              Publicado em {getDate(data.product.createdAt)} por:
             </PublishedText>
-            <SellerName>{item.seller}</SellerName>
+            <SellerName>{data.seller.name}</SellerName>
           </SellerContainer>
           <TrashButton onPress={() => {}}>
             <TrashImage source={trashIcon} />
